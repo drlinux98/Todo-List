@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TodoItem from './TodoItem';
+import './styles.css'
 
 function TodoList() {
   const [tasks, setTasks] = useState([]);
@@ -16,23 +17,45 @@ function TodoList() {
     const updatedTasks = tasks.filter((_, i) => i !== index);
     setTasks(updatedTasks);
   };
-
+          {/*Dentro del container puse las funcionalidades del TodoList*/} 
   return (
+  
     <div>
-      <h1>Todo List</h1>
+      
+     
+      
+      <div>
+        <div className='container' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', backgroundColor: '#FAEDCB' }}>
+        
+        <h1>Todo List</h1>
       <input
         type="text"
-        placeholder="Add a new task"
+        placeholder="Añade una nueva tarea"
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
       />
-      <button onClick={addTask}>Add</button>
+      <button onClick={addTask}>Añadir</button>
       <ul>
         {tasks.map((task, index) => (
           <TodoItem key={index} task={task} onDelete={() => deleteTask(index)} />
         ))}
       </ul>
+
+
+
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        </div>    
+
     </div>
+    
   );
 }
 
