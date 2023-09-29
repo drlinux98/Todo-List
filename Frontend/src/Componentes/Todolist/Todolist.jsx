@@ -1,10 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoItem from './TodoItem';
 import './styles.css'
+import { obtenerTareas, agregarTarea } from '../../api/api';
+export default TodoList;
+
+
 
 function TodoList() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
+
+  useEffect(() => {
+    obtenerTareas()
+      .then((data) => {
+        setTasks(data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener las tareas:', error);
+      });
+  }, []);
+
+
+
+
+
 
   const addTask = () => {
     if (newTask.trim() !== '') {
@@ -12,6 +31,22 @@ function TodoList() {
       setNewTask('');
     }
   };
+
+  const nuevaTarea = {
+    texto: newTask,
+    completada: false,
+  };
+
+ // Realiza la solicitud para agregar la nueva tarea
+ agregarTarea(nuevaTarea)
+ .then((data) => {
+   // Agrega la nueva tarea a la lista de tareas existente
+   setTasks([...tasks, data]);
+
+
+
+
+
 
   const deleteTask = (index) => {
     const updatedTasks = tasks.filter((_, i) => i !== index);
@@ -56,7 +91,8 @@ function TodoList() {
 
     </div>
     
-  );
-}
-
-export default TodoList;
+   );
+ 
+ 
+  },
+ ) }   

@@ -16,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: '/Task',
     element: <TodoList /> 
+  },
+  {
+    path: '/',
+    element: <LoginSignUP/>
   }
 ]);
 
